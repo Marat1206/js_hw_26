@@ -18,19 +18,19 @@ let user = {
     }
 }
 
-const deepFreeze = (user) =>{
-    let propNames = Object.getOwnPropertyNames(user);
-
-    propNames.forEach( (name) => {
-        let prop = user[name];
-
+function deepFreeze(user){
+    for (let key in user){
+        let prop = user[key];
         if (typeof prop == 'object' && prop !== null){
             deepFreeze(prop);
         }
-    });
-        return Object.freeze(user);
+    }
+    return Object.freeze(user);
 }
+// deepFreeze(user);
+user.data.a = 101;
+console.log(user);
 
-deepFreeze(user);
-user.name = 'vlad'
+
+
 
